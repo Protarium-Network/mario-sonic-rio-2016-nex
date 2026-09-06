@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: rio2016
+      POSTGRES_USER: rio2016
+      POSTGRES_PASSWORD: rio2016
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rio2016 -d rio2016"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - rio2016-postgres:/var/lib/postgresql/data
+
+  nex:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PN_RIO2016_AUTH_PORT: "26000"
+      PN_RIO2016_SECURE_PORT: "26001"
+      PN_RIO2016_SECURE_HOST: ${PN_RIO2016_SECURE_HOST:-protarium.lol}
+      PN_RIO2016_POSTGRES_URI: postgres://rio2016:rio2016@postgres:5432/rio2016?sslmode=disable
+      PN_RIO2016_KERBEROS_PASSWORD: ${PN_RIO2016_KERBEROS_PASSWORD:-change-me}
+      PN_RIO2016_LOCAL_MODE: "1"
+      PN_RIO2016_SETTINGS_PATH: /home/go/app/settings.json
+    ports:
+      - "26000:26000/udp"
+      - "26001:26001/udp"
+    volumes:
+      - ./settings.json:/home/go/app/settings.json:ro
+
+volumes:
+  rio2016-postgres:

@@ -1,0 +1,19 @@
+This server is built on the Pretendo Network NEX stack:
+
+  - github.com/PretendoNetwork/nex-go
+  - github.com/PretendoNetwork/nex-protocols-go
+  - github.com/PretendoNetwork/nex-protocols-common-go
+  - github.com/PretendoNetwork/plogger-go
+
+all licensed under the GNU Affero General Public License v3.0.
+
+internal/nex-protocols-common-go-patch/ is a vendored fork of
+nex-protocols-common-go with local DataStore changes (an S3 presigner and
+adjusted DataStore method behaviour) that Mario & Sonic Rio 2016's
+score-attachment flow needs. It keeps its own upstream AGPL-3.0 LICENSE.
+
+The Rio 2016 NEX configuration (game server ID 10190300, access key
+63fecb0f, NEX 3.4.7 with the Ranking library bumped to 3.6.0, and the
+Structure-header byte layout) was recovered from the retail EUR title and
+confirmed against real console captures. No proprietary Nintendo or SEGA
+code or assets are included.
