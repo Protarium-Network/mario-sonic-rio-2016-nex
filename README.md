@@ -96,3 +96,4 @@ the password unset to disable it.
 AGPL-3.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 _Deployed and maintained as part of the [Protarium Network](https://github.com/Protarium-Network) Wii U online service revival project._
+_Derived from Pretendo Network’s original codebase (PretendoNetwork). Copyright (C) Pretendo Network contributors._
